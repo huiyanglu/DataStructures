@@ -1,40 +1,38 @@
 import turtle
+import random
 
-def draw_brach(brach_length):
-    if brach_length > 5:
-        if brach_length < 40:
-            turtle.color('green')
+def tree(branchLen,t):
+    deg = random.randint(15,45) # the angle is selected at random in some range
+    sub = random.randint(5,15) # subtract a random amount in some range
+    if branchLen > 5:
+        if branchLen < 20:
+            t.color('green')
+            t.pensize(2)
         else:
-            turtle.color('red')
-        # 绘制右侧的树枝
-        turtle.forward(brach_length)
-        #print('向前',brach_length)
-        turtle.right(25)
-        #print('右转20')
-        draw_brach(brach_length-15)
-        # 绘制左侧的树枝
-        turtle.left(50)
-        #print('左转40')
-        draw_brach(brach_length-15)
-        if brach_length < 40:
-            turtle.color('green')
+            t.color('brown')
+        t.forward(branchLen)
+        t.right(deg)
+        tree(branchLen-sub,t)
+        t.left(deg*2)
+        tree(branchLen-sub,t)
+        if branchLen < 20:
+            t.color('green')
+            t.pensize(2)
         else:
-            turtle.color('red')
-        # 返回之前的树枝上
-        turtle.right(25)
-        #print('右转20')
-        turtle.backward(brach_length)
-        #print('返回',brach_length)
+            t.color('brown')
+        t.right(deg)
+        t.backward(branchLen)
 
 def main():
-    turtle.left(90)
-    turtle.penup()
-    turtle.backward(150)
-    turtle.pendown()
-    turtle.color('red')
-    draw_brach(100)
-    turtle.exitonclick()
+    t = turtle.Turtle()
+    myWin = turtle.Screen()
+    t.left(90)
+    t.up()
+    t.backward(100)
+    t.down()
+    t.color('green')
+    t.pensize(3)
+    tree(75,t)
+    myWin.exitonclick()
 
-if __name__ == '__main__':
-    main()
-
+main()
